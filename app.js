@@ -48,11 +48,22 @@ function addBook(event){
     // add tr to tbody
     booksList.appendChild(tr);
     // save book
-    //addBookToLocalStorage(book);
+    addBookToLocalStorage(book);
     titleInput.value = '';
     authorInput.value = '';
     isbnInput.value = '';
     event.preventDefault();
+}
+
+function addBookToLocalStorage(book){
+    let books;
+    if(localStorage.getItem('books') === null){
+        books = [];
+    } else {
+        books = JSON.parse(localStorage.getItem('books'));
+    }
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
 }
 
 /*
@@ -113,20 +124,6 @@ function deleteBookFromLocalStorage(task){
             tasks.splice(index, 1);
         }
     });
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-*/
-
-
-/*
-function addTaskToLocalStorage(task){
-    let tasks;
-    if(localStorage.getItem('tasks') === null){
-        tasks = [];
-    } else {
-        tasks = JSON.parse(localStorage.getItem('tasks'));
-    }
-    tasks.push(task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 */
